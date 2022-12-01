@@ -17,8 +17,12 @@ from CT import MakePath
 from AstarTimeSteps import AstarTimesteps
 
 
-def CBS(gridMap, Starts, Goals, subset=[], vertexCons=[], edgeCons=[]): # subset, vertex/edge- Cons - нужны только при вызове CBS в качестве нижнего уровня MACBS
+default_time_limit = 300 / 1000 # 300 milliseconds
+
+
+def CBS(gridMap, Starts, Goals, subset=[], vertexCons=[], edgeCons=[], time_limit=default_time_limit): # subset, vertex/edge- Cons - нужны только при вызове CBS в качестве нижнего уровня MACBS
     tic = time.perf_counter() # начало работы функции
+    print('hello')
     
     gen = 0
     exp = 0
@@ -67,7 +71,7 @@ def CBS(gridMap, Starts, Goals, subset=[], vertexCons=[], edgeCons=[]): # subset
     
     toc = time.perf_counter()
     
-    while toc - tic < 120:
+    while toc - tic < time_limit:
         s = OPEN.GetBestNode()
         exp += 1
         
