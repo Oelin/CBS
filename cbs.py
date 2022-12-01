@@ -131,8 +131,9 @@ def CBS(gridMap, Starts, Goals, subset=[], vertexCons=[], edgeCons=[], time_limi
             if a in A.edgeCons:
                 ec = A.edgeCons[a]
             
-            planner = AstarTimesteps(gridMap, Starts[a][0], Starts[a][1], Goals[a][0], Goals[a][1], A.vertexCons[a], ec)
+            planner = AstarTimesteps(gridMap, Starts[a][0], Starts[a][1], Goals[a][0], Goals[a][1], A.vertexCons[a], ec, time_start=tic, time_limit=time_limit)
             res = planner.FindPath()
+            if not res: return
             if res[0]:
                 path = MakePath(res[1])
                 A.sol[a], _ = path
@@ -158,8 +159,9 @@ def CBS(gridMap, Starts, Goals, subset=[], vertexCons=[], edgeCons=[], time_limi
             if b in B.edgeCons:
                 ec = B.edgeCons[b]
             
-            planner = AstarTimesteps(gridMap, Starts[b][0], Starts[b][1], Goals[b][0], Goals[b][1], B.vertexCons[b], ec)
+            planner = AstarTimesteps(gridMap, Starts[b][0], Starts[b][1], Goals[b][0], Goals[b][1], B.vertexCons[b], ec, time_start=tic, time_limit=time_limit)
             res = planner.FindPath()
+            if not res: return
             if res[0]:
                 path = MakePath(res[1])
                 B.sol[b], _ = path
@@ -190,8 +192,9 @@ def CBS(gridMap, Starts, Goals, subset=[], vertexCons=[], edgeCons=[], time_limi
             if a in A.vertexCons:
                 vc = A.vertexCons[a]
             
-            planner = AstarTimesteps(gridMap, Starts[a][0], Starts[a][1], Goals[a][0], Goals[a][1], vc, A.edgeCons[a])
+            planner = AstarTimesteps(gridMap, Starts[a][0], Starts[a][1], Goals[a][0], Goals[a][1], vc, A.edgeCons[a], time_start=tic, time_limit=time_limit)
             res = planner.FindPath()
+            if not res: return
             if res[0]:
                 path = MakePath(res[1])
                 A.sol[a], _ = path
@@ -217,8 +220,9 @@ def CBS(gridMap, Starts, Goals, subset=[], vertexCons=[], edgeCons=[], time_limi
             if b in B.vertexCons:
                 vc = B.vertexCons[b]
             
-            planner = AstarTimesteps(gridMap, Starts[b][0], Starts[b][1], Goals[b][0], Goals[b][1], vc, B.edgeCons[b])
+            planner = AstarTimesteps(gridMap, Starts[b][0], Starts[b][1], Goals[b][0], Goals[b][1], vc, B.edgeCons[b], time_start=tic, time_limit=time_limit)
             res = planner.FindPath()
+            if not res: return
             if res[0]:
                 path = MakePath(res[1])
                 B.sol[b], _ = path
