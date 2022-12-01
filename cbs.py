@@ -33,22 +33,27 @@ def CBS(gridMap, Starts, Goals, subset=[], vertexCons=[], edgeCons=[], time_limi
         agents = subset.copy()
     
     for vc in vertexCons:
+        if time.perf_counter() - tic >= time_limit: return
         # перебираем агентов из подмножества
         for a in vc[0]:
+            if time.perf_counter() - tic >= time_limit: return
             if a in root.vertexCons:
                 root.vertexCons[a].append((vc[1], vc[2]))
             else:
                 root.vertexCons[a] = [(vc[1], vc[2])]
                 
     for ec in edgeCons:
+        if time.perf_counter() - tic >= time_limit: return
         # перебираем агентов из подмножества
         for a in ec[0]:
+            if time.perf_counter() - tic >= time_limit: return
             if a in root.edgeCons:
                 root.edgeCons[a].append((ec[1], ec[2], ec[3]))
             else:
                 root.edgeCons[a] = [(ec[1], ec[2], ec[3])]
                 
     for a in agents:
+        if time.perf_counter() - tic >= time_limit: return
         VC = []
         EC = []
         if a in root.vertexCons:
@@ -78,8 +83,14 @@ def CBS(gridMap, Starts, Goals, subset=[], vertexCons=[], edgeCons=[], time_limi
         newEdgeCons = []
         
         for i, a in enumerate(agents):
+            if time.perf_counter() - tic >= time_limit: return
+        
             for b in agents[i + 1 :]:
+                if time.perf_counter() - tic >= time_limit: return
+            
                 for step in range(min(len(s.sol[a]), len(s.sol[b]))):
+                    if time.perf_counter() - tic >= time_limit: return
+                
                     if s.sol[a][step].i == s.sol[b][step].i and s.sol[a][step].j == s.sol[b][step].j:
                         newVertexCons.append((a, b, (s.sol[a][step].i, s.sol[a][step].j), step))
                     if step + 1 < min(len(s.sol[a]), len(s.sol[b])) and \
