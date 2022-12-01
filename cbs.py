@@ -61,8 +61,9 @@ def CBS(gridMap, Starts, Goals, subset=[], vertexCons=[], edgeCons=[], time_limi
         if a in root.edgeCons:
             EC = root.edgeCons[a]
             
-        planner = AstarTimesteps(gridMap, Starts[a][0], Starts[a][1], Goals[a][0], Goals[a][1], VC, EC)
+        planner = AstarTimesteps(gridMap, Starts[a][0], Starts[a][1], Goals[a][0], Goals[a][1], VC, EC, time_start=tic, time_limit=time_limit)
         res = planner.FindPath()
+        if not res: return
         if res[0]:
             path = MakePath(res[1])
             root.sol[a], _ = path
