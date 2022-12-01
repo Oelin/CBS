@@ -22,7 +22,6 @@ default_time_limit = 300 / 1000 # 300 milliseconds
 
 def CBS(gridMap, Starts, Goals, subset=[], vertexCons=[], edgeCons=[], time_limit=default_time_limit): # subset, vertex/edge- Cons - нужны только при вызове CBS в качестве нижнего уровня MACBS
     tic = time.perf_counter() # начало работы функции
-    print('hello')
     
     gen = 0
     exp = 0
